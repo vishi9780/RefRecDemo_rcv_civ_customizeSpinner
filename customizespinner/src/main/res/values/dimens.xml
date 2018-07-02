@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="icon_cross">15dp</dimen>
+    <dimen name="label_title_size">10sp</dimen>
+    <dimen name="padding_label_view">0dp</dimen>
+    <dimen name="margin_between_labels">2dp</dimen>
+    <dimen name="twenty_dp">20dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="padding_icon_cross">2dp</dimen>
+</resources>

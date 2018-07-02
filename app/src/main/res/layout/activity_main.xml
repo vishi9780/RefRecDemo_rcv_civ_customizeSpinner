@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autolabel="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Button
+        android:id="@+id/btn_CompletedProjects"
+        android:layout_width="match_parent"
+        android:text="hit the api"
+        android:layout_height="50dp"/>
+    <Spinner
+        android:id="@+id/spinnerSector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog" />
+    <responsehandling.app.com.customizespinner.AutoLabelUI
+        android:id="@+id/label_Sector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_marginTop="@dimen/five_dp"
+        android:padding="@dimen/five_dp"
+        autolabel:icon_cross="@drawable/cross"
+        autolabel:label_background_res="@color/default_background_label"
+        autolabel:label_clickable="true"
+        autolabel:label_padding="@dimen/five_dp"
+        autolabel:max_labels="10"
+        autolabel:show_cross="true"
+        autolabel:text_color="@android:color/white"
+        autolabel:text_size="@dimen/label_title_size"/>
+    <responsehandling.app.com.refrecdemo.xrecyclerview.XRecyclerView
+        android:id="@+id/rv_CompletedProjects"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
+            <ImageView android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/iv_test_icon_1"/>
+
+            <ImageView android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:id="@+id/iv_test_icon_2"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_1"/>
+
+            <ImageView android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/iv_test_icon_10"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_2"/>
+
+            <ImageView android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/iv_test_icon_3"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_10"/>
+
+            <ImageView android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/iv_test_icon_11"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_3"/>
+
+            <ImageView android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:id="@+id/iv_test_icon_4"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_11"/>
+
+            <ImageView android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/iv_test_icon_5"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_4"/>
+
+            <ImageView android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/iv_test_icon_6"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_5"/>
+
+            <ImageView android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/iv_test_icon_7"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_6"/>
+
+            <ImageView android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/iv_test_icon_8"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_7"/>
+
+            <ImageView android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/iv_test_icon_9"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/iv_test_icon_8"/>
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

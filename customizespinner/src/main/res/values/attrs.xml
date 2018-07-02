@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LabelsView">
+        <attr name="max_labels" format="integer" />
+        <attr name="show_cross" format="boolean" />
+        <attr name="icon_cross" format="reference" />
+        <attr name="text_color" format="color"/>
+        <attr name="text_size" format="dimension"/>
+        <attr name="label_background_res" format="reference"/>
+        <attr name="label_clickable" format="boolean" />
+        <attr name="label_padding" format="dimension"/>
+    </declare-styleable>
+
+
+</resources>

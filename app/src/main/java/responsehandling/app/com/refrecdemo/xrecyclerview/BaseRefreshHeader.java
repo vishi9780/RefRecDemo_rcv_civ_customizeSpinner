@@ -1,8 +1,6 @@
 package responsehandling.app.com.refrecdemo.xrecyclerview;
 
-/**
- * Created by jianghejie on 15/11/22.
- */
+
 interface BaseRefreshHeader {
 
 	int STATE_NORMAL = 0;

@@ -9,9 +9,6 @@ import android.view.animation.LinearInterpolator;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Jack on 2015/10/19.
- */
 public class BallTrianglePathIndicator extends BaseIndicatorController {
 
     float[] translateX=new float[3],translateY=new float[3];

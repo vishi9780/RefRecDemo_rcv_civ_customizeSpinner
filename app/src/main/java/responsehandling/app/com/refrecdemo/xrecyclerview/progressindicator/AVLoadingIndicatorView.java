@@ -14,104 +14,29 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import responsehandling.app.com.refrecdemo.R;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallBeatIndicator;
 import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallClipRotateIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallClipRotateMultipleIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallClipRotatePulseIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallGridBeatIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallGridPulseIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallPulseIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallPulseRiseIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallPulseSyncIndicator;
 import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallRotateIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallScaleIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallScaleMultipleIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallScaleRippleIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallScaleRippleMultipleIndicator;
 import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallSpinFadeLoaderIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallTrianglePathIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallZigZagDeflectIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BallZigZagIndicator;
 import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.BaseIndicatorController;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.CubeTransitionIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.LineScaleIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.LineScalePartyIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.LineScalePulseOutIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.LineScalePulseOutRapidIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.LineSpinFadeLoaderIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.PacmanIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.SemiCircleSpinIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.SquareSpinIndicator;
-import responsehandling.app.com.refrecdemo.xrecyclerview.progressindicator.indicator.TriangleSkewSpinIndicator;
 
 
 public class AVLoadingIndicatorView extends View {
+
     //indicators
-    public static final int BallPulse=0;
-    public static final int BallGridPulse=1;
-    public static final int BallClipRotate=2;
-    public static final int BallClipRotatePulse=3;
-    public static final int SquareSpin=4;
-    public static final int BallClipRotateMultiple=5;
-    public static final int BallPulseRise=6;
     public static final int BallRotate=7;
-    public static final int CubeTransition=8;
-    public static final int BallZigZag=9;
-    public static final int BallZigZagDeflect=10;
-    public static final int BallTrianglePath=11;
-    public static final int BallScale=12;
-    public static final int LineScale=13;
-    public static final int LineScaleParty=14;
-    public static final int BallScaleMultiple=15;
-    public static final int BallPulseSync=16;
-    public static final int BallBeat=17;
-    public static final int LineScalePulseOut=18;
-    public static final int LineScalePulseOutRapid=19;
-    public static final int BallScaleRipple=20;
-    public static final int BallScaleRippleMultiple=21;
     public static final int BallSpinFadeLoader=22;
-    public static final int LineSpinFadeLoader=23;
-    public static final int TriangleSkewSpin=24;
-    public static final int Pacman=25;
-    public static final int BallGridBeat=26;
-    public static final int SemiCircleSpin=27;
+    //Sizes (with defaults in DP)
 
-
+    public static final int DEFAULT_SIZE=30;
     @IntDef(flag = true,
             value = {
-                    BallPulse,
-                    BallGridPulse,
-                    BallClipRotate,
-                    BallClipRotatePulse,
-                    SquareSpin,
-                    BallClipRotateMultiple,
-                    BallPulseRise,
+
+
+
                     BallRotate,
-                    CubeTransition,
-                    BallZigZag,
-                    BallZigZagDeflect,
-                    BallTrianglePath,
-                    BallScale,
-                    LineScale,
-                    LineScaleParty,
-                    BallScaleMultiple,
-                    BallPulseSync,
-                    BallBeat,
-                    LineScalePulseOut,
-                    LineScalePulseOutRapid,
-                    BallScaleRipple,
-                    BallScaleRippleMultiple,
-                    BallSpinFadeLoader,
-                    LineSpinFadeLoader,
-                    TriangleSkewSpin,
-                    Pacman,
-                    BallGridBeat,
-                    SemiCircleSpin
+                    BallSpinFadeLoader
             })
     public @interface Indicator{}
-
-    //Sizes (with defaults in DP)
-    public static final int DEFAULT_SIZE=30;
 
     //attrs
     int mIndicatorId;
@@ -148,7 +73,7 @@ public class AVLoadingIndicatorView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AVLoadingIndicatorView);
-        mIndicatorId=a.getInt(R.styleable.AVLoadingIndicatorView_indicator, BallPulse);
+        mIndicatorId=a.getInt(R.styleable.AVLoadingIndicatorView_indicator, BallRotate);
         mIndicatorColor=a.getColor(R.styleable.AVLoadingIndicatorView_indicator_color, Color.WHITE);
         a.recycle();
         mPaint=new Paint();
@@ -171,90 +96,14 @@ public class AVLoadingIndicatorView extends View {
 
     private void applyIndicator(){
         switch (mIndicatorId){
-            case BallPulse:
-                mIndicatorController=new BallPulseIndicator();
-                break;
-            case BallGridPulse:
-                mIndicatorController=new BallGridPulseIndicator();
-                break;
-            case BallClipRotate:
-                mIndicatorController=new BallClipRotateIndicator();
-                break;
-            case BallClipRotatePulse:
-                mIndicatorController=new BallClipRotatePulseIndicator();
-                break;
-            case SquareSpin:
-                mIndicatorController=new SquareSpinIndicator();
-                break;
-            case BallClipRotateMultiple:
-                mIndicatorController=new BallClipRotateMultipleIndicator();
-                break;
-            case BallPulseRise:
-                mIndicatorController=new BallPulseRiseIndicator();
-                break;
+
             case BallRotate:
                 mIndicatorController=new BallRotateIndicator();
-                break;
-            case CubeTransition:
-                mIndicatorController=new CubeTransitionIndicator();
-                break;
-            case BallZigZag:
-                mIndicatorController=new BallZigZagIndicator();
-                break;
-            case BallZigZagDeflect:
-                mIndicatorController=new BallZigZagDeflectIndicator();
-                break;
-            case BallTrianglePath:
-                mIndicatorController=new BallTrianglePathIndicator();
-                break;
-            case BallScale:
-                mIndicatorController=new BallScaleIndicator();
-                break;
-            case LineScale:
-                mIndicatorController=new LineScaleIndicator();
-                break;
-            case LineScaleParty:
-                mIndicatorController=new LineScalePartyIndicator();
-                break;
-            case BallScaleMultiple:
-                mIndicatorController=new BallScaleMultipleIndicator();
-                break;
-            case BallPulseSync:
-                mIndicatorController=new BallPulseSyncIndicator();
-                break;
-            case BallBeat:
-                mIndicatorController=new BallBeatIndicator();
-                break;
-            case LineScalePulseOut:
-                mIndicatorController=new LineScalePulseOutIndicator();
-                break;
-            case LineScalePulseOutRapid:
-                mIndicatorController=new LineScalePulseOutRapidIndicator();
-                break;
-            case BallScaleRipple:
-                mIndicatorController=new BallScaleRippleIndicator();
-                break;
-            case BallScaleRippleMultiple:
-                mIndicatorController=new BallScaleRippleMultipleIndicator();
                 break;
             case BallSpinFadeLoader:
                 mIndicatorController=new BallSpinFadeLoaderIndicator();
                 break;
-            case LineSpinFadeLoader:
-                mIndicatorController=new LineSpinFadeLoaderIndicator();
-                break;
-            case TriangleSkewSpin:
-                mIndicatorController=new TriangleSkewSpinIndicator();
-                break;
-            case Pacman:
-                mIndicatorController=new PacmanIndicator();
-                break;
-            case BallGridBeat:
-                mIndicatorController=new BallGridBeatIndicator();
-                break;
-            case SemiCircleSpin:
-                mIndicatorController=new SemiCircleSpinIndicator();
-                break;
+
         }
         mIndicatorController.setTarget(this);
     }

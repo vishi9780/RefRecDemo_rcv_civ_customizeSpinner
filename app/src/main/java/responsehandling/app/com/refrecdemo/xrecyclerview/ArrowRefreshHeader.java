@@ -53,7 +53,6 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
 	}
 
 	private void initView() {
-		// 初始情况，设置下拉刷新view高度为0
 		mContainer = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.listview_header, null);
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         lp.setMargins(0, 0, 0, 0);
@@ -106,14 +105,14 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
 	public void setState(int state) {
 		if (state == mState) return ;
 
-		if (state == STATE_REFRESHING) {	// 显示进度
+		if (state == STATE_REFRESHING) {
 			mArrowImageView.clearAnimation();
 			mArrowImageView.setVisibility(View.INVISIBLE);
 			mProgressBar.setVisibility(View.VISIBLE);
 		} else if(state == STATE_DONE) {
             mArrowImageView.setVisibility(View.INVISIBLE);
             mProgressBar.setVisibility(View.INVISIBLE);
-        } else {	// 显示箭头图片
+        } else {
 			mArrowImageView.setVisibility(View.VISIBLE);
 			mProgressBar.setVisibility(View.INVISIBLE);
 		}
@@ -178,7 +177,7 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
     public void onMove(float delta) {
         if(getVisibleHeight() > 0 || delta > 0) {
             setVisibleHeight((int) delta + getVisibleHeight());
-            if (mState <= STATE_RELEASE_TO_REFRESH) { // 未处于刷新状态，更新箭头
+            if (mState <= STATE_RELEASE_TO_REFRESH) {
                 if (getVisibleHeight() > mMeasuredHeight) {
                     setState(STATE_RELEASE_TO_REFRESH);
                 }else {

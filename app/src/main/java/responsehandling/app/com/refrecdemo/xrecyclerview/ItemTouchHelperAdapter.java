@@ -2,9 +2,7 @@ package responsehandling.app.com.refrecdemo.xrecyclerview;
 
 import android.support.v7.widget.RecyclerView;
 
-/**
- * Created by jianghejie on 16/6/20.
- */
+
 
 public interface ItemTouchHelperAdapter {
 

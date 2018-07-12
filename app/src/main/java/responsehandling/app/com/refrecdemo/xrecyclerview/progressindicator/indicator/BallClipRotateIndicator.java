@@ -9,9 +9,7 @@ import android.graphics.RectF;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Jack on 2015/10/16.
- */
+
 public class BallClipRotateIndicator extends BaseIndicatorController {
 
     float scaleFloat=1,degrees;

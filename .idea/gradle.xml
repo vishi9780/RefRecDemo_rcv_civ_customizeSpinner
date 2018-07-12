@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/civ" />
             <option value="$PROJECT_DIR$/customizespinner" />
+            <option value="$PROJECT_DIR$/smoothscroll" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

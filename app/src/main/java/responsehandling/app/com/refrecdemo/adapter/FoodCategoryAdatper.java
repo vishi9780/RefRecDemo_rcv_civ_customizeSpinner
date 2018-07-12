@@ -2,18 +2,16 @@ package responsehandling.app.com.refrecdemo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import responsehandling.app.com.refrecdemo.R;
+
 
 public class FoodCategoryAdatper extends RecyclerView.Adapter<FoodCategoryAdatper.MyViewHolder> {
     private Context context;
@@ -33,7 +31,7 @@ public class FoodCategoryAdatper extends RecyclerView.Adapter<FoodCategoryAdatpe
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.adapter_category, parent, false);
+                .inflate( R.layout.adapter_category, parent, false);
         return new MyViewHolder(v);
     }
 
@@ -56,7 +54,7 @@ public class FoodCategoryAdatper extends RecyclerView.Adapter<FoodCategoryAdatpe
     @Override
     public int getItemCount() {
 
-        return hashMapArrayList.size();
+        return hashMapArrayList==null ? 0 :hashMapArrayList.size();
     }
 
 

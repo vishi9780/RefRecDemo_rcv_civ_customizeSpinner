@@ -29,14 +29,11 @@ public class XRecyclerView extends RecyclerView {
     private ArrowRefreshHeader mRefreshHeader;
     private boolean pullRefreshEnabled = true;
     private boolean loadingMoreEnabled = true;
-    //下面的ItemViewType是保留值(ReservedItemViewType),如果用户的adapter与它们重复将会强制抛出异常。不过为了简化,我们检测到重复时对用户的提示是ItemViewType必须小于10000
     private static final int TYPE_REFRESH_HEADER = 10000;
-    //设置一个很大的数字,尽可能避免和用户的adapter冲突
     private static final int TYPE_FOOTER = 10001;
     private static final int HEADER_INIT_INDEX = 10002;
-    private static List<Integer> sHeaderTypes = new ArrayList<>();//每个header必须有不同的type,不然滚动的时候顺序会变化
+    private static List<Integer> sHeaderTypes = new ArrayList<>();
     private int mPageCount = 0;
-    //adapter没有数据的时候显示,类似于listView的emptyView
     private View mEmptyView;
     private View mFootView;
     private final RecyclerView.AdapterDataObserver mDataObserver = new DataObserver();
@@ -70,7 +67,11 @@ public class XRecyclerView extends RecyclerView {
         mHeaderViews.add(view);
     }
 
-    //根据header的ViewType判断是哪个header
+    /**
+     * header ViewType
+     * @param itemType
+     * @return
+     */
     private View getHeaderViewByType(int itemType) {
         if(!isHeaderType(itemType)) {
             return null;
@@ -78,12 +79,20 @@ public class XRecyclerView extends RecyclerView {
         return mHeaderViews.get(itemType - HEADER_INIT_INDEX);
     }
 
-    //判断一个type是否为HeaderType
+    /**
+     * Header Type
+     * @param itemViewType
+     * @return
+     */
     private boolean isHeaderType(int itemViewType) {
         return  mHeaderViews.size() > 0 &&  sHeaderTypes.contains(itemViewType);
     }
 
-    //判断是否是XRecyclerView保留的itemViewType
+    /**
+     * RecyclerView
+     * @param itemViewType
+     * @return
+     */
     private boolean isReservedItemViewType(int itemViewType) {
         if(itemViewType == TYPE_REFRESH_HEADER || itemViewType == TYPE_FOOTER || sHeaderTypes.contains(itemViewType)) {
             return true;
@@ -510,7 +519,7 @@ public class XRecyclerView extends RecyclerView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        //解决和CollapsingToolbarLayout冲突的问题
+        //Collapsing Toolbar layout
         AppBarLayout appBarLayout = null;
         ViewParent p = getParent();
         while (p != null) {

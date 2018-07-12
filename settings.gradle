@@ -1,1 +1,1 @@
-include ':app', ':customizespinner', ':civ'
+include ':app', ':customizespinner', ':civ', ':smoothscroll'

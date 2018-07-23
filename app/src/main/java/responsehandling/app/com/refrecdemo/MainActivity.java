@@ -76,11 +76,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e(TAG, "onCreate:70<<udid>>"+ Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID) );
-        TelephonyManager TelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-        Log.e(TAG, "onCreate: <m_deviceId >"+  TelephonyMgr.getDeviceId());
+//        Log.e(TAG, "onCreate:70<<udid>>"+ Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID) );
+//        TelephonyManager TelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+//        Log.e(TAG, "onCreate: <m_deviceId >"+  TelephonyMgr.getDeviceId());
 
-        getDeviceID();
+//        getDeviceID();
         findIDs();
     }
 

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "responsehandling.app.com.refrecdemo"
-        minSdkVersion 22
+        minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"

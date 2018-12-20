@@ -4,9 +4,11 @@ import android.animation.Animator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
-
 import java.util.List;
 
+/**
+ * Created by Jack on 2015/10/15.
+ */
 public abstract class BaseIndicatorController {
 
 
@@ -14,6 +16,11 @@ public abstract class BaseIndicatorController {
 
     private List<Animator> mAnimators;
 
+    public void destroy(){
+        mTarget = null;
+        releaseAnimations();
+        mAnimators = null;
+    }
 
     public void setTarget(View target){
         this.mTarget=target;
@@ -25,15 +32,23 @@ public abstract class BaseIndicatorController {
 
 
     public int getWidth(){
+        if(mTarget == null){
+            return 0;
+        }
         return mTarget.getWidth();
     }
 
     public int getHeight(){
+        if(mTarget == null){
+            return 0;
+        }
         return mTarget.getHeight();
     }
 
     public void postInvalidate(){
-        mTarget.postInvalidate();
+        if(mTarget != null){
+            mTarget.postInvalidate();
+        }
     }
 
     /**
@@ -41,7 +56,7 @@ public abstract class BaseIndicatorController {
      * @param canvas
      * @param paint
      */
-    public abstract void draw(Canvas canvas, Paint paint);
+    public abstract void draw(Canvas canvas,Paint paint);
 
     /**
      * create animation or animations
@@ -50,6 +65,21 @@ public abstract class BaseIndicatorController {
 
     public void initAnimation(){
         mAnimators=createAnimation();
+    }
+
+    // add by lgh
+    private void releaseAnimations(){
+        if (mAnimators==null){
+            return;
+        }
+        int count=mAnimators.size();
+        for (int i = 0; i < count; i++) {
+            Animator animator = mAnimators.get(i);
+            animator.cancel();
+            animator.removeAllListeners();
+        }
+        mAnimators.clear();
+        mAnimators = null;
     }
 
     /**

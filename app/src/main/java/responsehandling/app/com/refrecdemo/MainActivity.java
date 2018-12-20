@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String name="";
     FoodCategoryAdatper foodCategoryAdatper;
     ArrayList<HashMap<String,String >> arrayList=new ArrayList<>();
-    private int count=0;
-
+    private int totalPage=-1;
+    private int currentPage=1;
     //Spinner Custom
     private AutoLabelUI label_Sector;
     List<String> categories = new ArrayList<String>();
@@ -101,24 +101,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(getApplicationContext(),SmoothScrollCollapsingToolbarLayout.class));
             }
         });
+        rv_CompletedProjects.setPullRefreshEnabled(false);
+
         rv_CompletedProjects.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-              /*  count++;
-                Log.e(TAG, "onRefresh: "+count );
-                hitTheAPI(String.valueOf(count));*/
             }
 
             @Override
             public void onLoadMore() {
-               /* count++;
-                Log.e(TAG, "onLoadMore: "+count );
-                hitTheAPI(String.valueOf(count));*/
+                if (totalPage>=currentPage) {
+                    hitTheAPI(currentPage,true);
+                }else {
+                    rv_CompletedProjects.loadMoreComplete();
+
+                }
             }
         });
         label_Sector = (AutoLabelUI) findViewById(R.id.label_Sector);
         spinnerSector = (Spinner) findViewById(R.id.spinnerSector);
-        categories.add("(*)(*)");
+        categories.add("----------------------(*)(*)-------------------");
         categories.add("Automobile");
         categories.add("Business Services");
         categories.add("Computers");
@@ -145,34 +147,41 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 .withLabelPadding(R.dimen.five_dp)
                 .build();
         label_Sector.setSettings(autoLabelUISettings);
-
+        hitTheAPI(currentPage,false);
         //CircularImageView
         new ImageLoader().execute();
     }
 
 
-    private void hitTheAPI(final String perpage) {
+    private void hitTheAPI(final int perpage,final boolean isFromLoadMore) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<Object> call = apiService.getTopRatedMovies(perpage);
+        Call<Object> call = apiService.getTopRatedMovies("ec01f8c2eb6ac402f2ca026dc2d9b8fd","",perpage);
         call.enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
-
+                    if (isFromLoadMore){
+                        rv_CompletedProjects.loadMoreComplete();
+                    }
 
                 try {
 //                    arrayList.clear();
-                    JSONArray object = new JSONArray(new Gson().toJson(response.body()));
+                    JSONObject object = new JSONObject(new Gson().toJson(response.body()));
+                    currentPage=perpage+1;
+                    totalPage=object.optInt("total_pages");
+//                    totalPage=3;
                     Log.e("TAG", "onResponse: " + object);
-                    for (int i = 0; i < object.length(); i++) {
-                        JSONObject jsonObject=object.optJSONObject(i);
+                    JSONArray results=object.getJSONArray("results");
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject jsonObject=results.optJSONObject(i);
                         HashMap<String,String> hashMap=new HashMap<>();
-                        hashMap.put("name",jsonObject.optString("name"));
+                        hashMap.put("name",jsonObject.optString("title"));
                         arrayList.add(hashMap);
                     }
                     foodCategoryAdatper=new FoodCategoryAdatper(MainActivity.this,arrayList);
                     rv_CompletedProjects.setAdapter(foodCategoryAdatper);
                     foodCategoryAdatper.notifyDataSetChanged();
-                    if(Integer.parseInt(perpage)!=1){
+
+                    if(perpage!=1){
                         rv_CompletedProjects.refreshComplete();
                     }
                 } catch (JSONException e) {
@@ -184,6 +193,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 Log.e(TAG, "onFailure: ",t );
+                if (isFromLoadMore){
+                    rv_CompletedProjects.loadMoreComplete();
+                }
             }
         });
     }
@@ -383,63 +395,4 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 
-    public String getDeviceID() {
-
-
-        TelephonyManager TelephonyMgr = (TelephonyManager) getApplicationContext().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        @SuppressLint("MissingPermission") String m_szImei = TelephonyMgr.getDeviceId(); // Requires
-        // READ_PHONE_STATE
-
-        // 2 compute DEVICE ID
-        String m_szDevIDShort = "35"
-                + // we make this look like a valid IMEI
-                Build.BOARD.length() % 10 + Build.BRAND.length() % 10
-                + Build.CPU_ABI.length() % 10 + Build.DEVICE.length() % 10
-                + Build.DISPLAY.length() % 10 + Build.HOST.length() % 10
-                + Build.ID.length() % 10 + Build.MANUFACTURER.length() % 10
-                + Build.MODEL.length() % 10 + Build.PRODUCT.length() % 10
-                + Build.TAGS.length() % 10 + Build.TYPE.length() % 10
-                + Build.USER.length() % 10; // 13 digits
-// 3 android ID - unreliable
-        String m_szAndroidID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-// 4 wifi manager, read MAC address - requires
-// android.permission.ACCESS_WIFI_STATE or comes as null
-        WifiManager wm = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        String m_szWLANMAC = wm.getConnectionInfo().getMacAddress();
-        // 5 Bluetooth MAC address android.permission.BLUETOOTH required
-        BluetoothAdapter m_BluetoothAdapter = null; // Local Bluetooth adapter
-        m_BluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        String m_szBTMAC = m_BluetoothAdapter.getAddress();
-        System.out.println("m_szBTMAC "+m_szBTMAC);
-
-        // 6 SUM THE IDs
-        String m_szLongID = m_szImei + m_szDevIDShort + m_szAndroidID+ m_szWLANMAC + m_szBTMAC;
-        System.out.println("m_szLongID "+m_szLongID);
-        MessageDigest m = null;
-        try {
-            m = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        m.update(m_szLongID.getBytes(), 0, m_szLongID.length());
-        byte p_md5Data[] = m.digest();
-
-        String m_szUniqueID = new String();
-        for (int i = 0; i < p_md5Data.length; i++) {
-            int b = (0xFF & p_md5Data[i]);
-// if it is a single digit, make sure it have 0 in front (proper
-// padding)
-            if (b <= 0xF)
-                m_szUniqueID += "0";
-// add number to string
-            m_szUniqueID += Integer.toHexString(b);
-        }
-        m_szUniqueID = m_szUniqueID.toUpperCase();
-
-        Log.e("-------------DeviceID------------", m_szUniqueID);
-        Log.e("DeviceIdCheck", "DeviceId that generated MPreferenceActivity:"+m_szUniqueID);
-
-        return m_szUniqueID;
-
-    }
 }

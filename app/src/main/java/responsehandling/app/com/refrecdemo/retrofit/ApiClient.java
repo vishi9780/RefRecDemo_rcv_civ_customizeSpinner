@@ -18,7 +18,7 @@ public class ApiClient {
                 .build();
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("BASE_URL_HERE")
+                    .baseUrl("https://api.themoviedb.org/3/movie/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

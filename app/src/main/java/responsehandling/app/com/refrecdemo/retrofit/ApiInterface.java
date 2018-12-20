@@ -5,6 +5,10 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
-    @GET("stations")
-    Call<Object> getTopRatedMovies(@Query("page") String perpage);
+    @GET("top_rated")
+    Call<Object> getTopRatedMovies(
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("page") int pageIndex
+    );
 }
